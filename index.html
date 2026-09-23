@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>VistaFind | Discover Your View</title>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <header class="site-header">
+
+        <div class="brand">
+            <div class="brand-mark">VF</div>
+
+            <div>
+                <h1>VistaFind</h1>
+                <p>Search the world. Find your view.</p>
+            </div>
+        </div>
+
+        <div class="header-note">
+            <span class="status-dot"></span>
+            Visual discovery
+        </div>
+
+    </header>
+
+
+    <main class="page-shell">
+
+        <section class="hero">
+
+            <p class="eyebrow">EXPLORE SOMETHING NEW</p>
+
+            <h2>What do you want to see?</h2>
+
+            <p class="hero-text">
+                Enter a topic below and discover a collection of images
+                that match your idea.
+            </p>
+
+
+            <form id="search-form" class="search-panel">
+
+                <label for="search-input">
+                    Search for images
+                </label>
+
+                <div class="search-row">
+
+                    <input
+                        id="search-input"
+                        name="query"
+                        type="search"
+                        placeholder="Try mountains, cars, or space..."
+                        autocomplete="off"
+                    >
+
+                    <button
+                        id="search-button"
+                        type="submit"
+                    >
+                        Search
+                    </button>
+
+                    <button
+                        id="clear-button"
+                        type="button"
+                    >
+                        Clear
+                    </button>
+
+                </div>
+
+            </form>
+
+
+            <div
+                class="quick-picks"
+                aria-label="Quick search suggestions"
+            >
+
+                <span class="quick-label">
+                    Quick picks
+                </span>
+
+                <button class="chip" type="button">
+                    Nature
+                </button>
+
+                <button class="chip" type="button">
+                    Cities
+                </button>
+
+                <button class="chip" type="button">
+                    Space
+                </button>
+
+                <button class="chip" type="button">
+                    Animals
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <section
+            class="results-section"
+            aria-labelledby="results-heading"
+        >
+
+            <div class="results-heading">
+
+                <div>
+                    <p class="section-kicker">
+                        YOUR GALLERY
+                    </p>
+
+                    <h2 id="results-heading">
+                        Results
+                    </h2>
+                </div>
+
+                <p id="result-count">
+                    Results will appear here
+                </p>
+
+            </div>
+
+
+            <!-- Keep this container EMPTY for Part 1 -->
+            <div id="results" class="results-grid"></div>
+
+
+            <div id="empty-state" class="empty-state">
+
+                <div class="empty-icon">
+                    ⌕
+                </div>
+
+                <h3>
+                    Search to see results
+                </h3>
+
+                <p>
+                    Your image gallery is waiting for its first search.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer class="site-footer">
+
+        <p>
+            VistaFind · Part 1 UI shell
+        </p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
