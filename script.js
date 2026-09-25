@@ -2,11 +2,24 @@ const form = document.getElementById("search-form");
 const input = document.getElementById("search-input");
 const results = document.getElementById("results");
 const resultCount = document.getElementById("result-count");
+const emptyState = document.getElementById("empty-state");
 
 function render(items, query) {
     results.innerHTML = "";
 
-    resultCount.textContent = `Showing ${items.length} results for "${query}"`;
+    if (items.length === 0) {
+        resultCount.textContent = "";
+        emptyState.style.display = "grid";
+        emptyState.querySelector("h3").textContent =
+            `No results for "${query}"`;
+        emptyState.querySelector("p").textContent =
+            "Try another search term.";
+        return;
+    }
+
+    emptyState.style.display = "none";
+    resultCount.textContent =
+        `Showing ${items.length} results for "${query}"`;
 
     items.forEach((item) => {
         const card = document.createElement("article");
@@ -27,6 +40,10 @@ function render(items, query) {
 }
 
 async function search(query) {
+    results.innerHTML = "";
+    emptyState.style.display = "none";
+    resultCount.textContent = "Searching...";
+
     const url =
         "https://commons.wikimedia.org/w/api.php?action=query" +
         "&generator=search" +
@@ -39,19 +56,29 @@ async function search(query) {
         "&format=json" +
         "&origin=*";
 
-    const response = await fetch(url);
+    try {
+        const response = await fetch(url);
 
-    if (!response.ok) {
-        throw new Error(response.status);
+        if (!response.ok) {
+            throw new Error(response.status);
+        }
+
+        const data = await response.json();
+
+        const items = data.query
+            ? Object.values(data.query.pages)
+            : [];
+
+        render(items, query);
+    } catch (error) {
+        results.innerHTML = "";
+        emptyState.style.display = "grid";
+        resultCount.textContent = "Search failed";
+        emptyState.querySelector("h3").textContent =
+            "Something went wrong.";
+        emptyState.querySelector("p").textContent =
+            "Please try again.";
     }
-
-    const data = await response.json();
-
-    const items = data.query
-        ? Object.values(data.query.pages)
-        : [];
-
-    render(items, query);
 }
 
 form.addEventListener("submit", async (event) => {
